@@ -7,3 +7,5 @@ abak-speech
 whisper-cli
 ggml-large-v3-turbo.bin
 whisper.cpp/
+dist/
+build/
