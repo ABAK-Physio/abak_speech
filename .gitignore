@@ -1,0 +1,9 @@
+# https://dart.dev/tools/private-files
+# Created by `dart pub`
+.dart_tool/
+.idea/
+
+abak-speech
+whisper-cli
+ggml-large-v3-turbo.bin
+whisper.cpp/
