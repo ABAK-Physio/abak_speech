@@ -16,7 +16,7 @@ INSTALL_DIR="$ROOT_PKG/Library/Application Support/ABAK/speech"
 
 PKG_IDENTIFIER="care.abak.speech"
 PKG_VERSION="$(cat "$ROOT_DIR/VERSION")"
-PKG_OUTPUT="$OUTPUT_DIR/ABAK_Speech_${PKG_VERSION}_macOS.pkg"
+PKG_OUTPUT="$OUTPUT_DIR/ABAK_Speech_macOS.pkg"
 
 APP_SIGN_IDENTITY="Developer ID Application: Abak Metrics (LP84QVHHSV)"
 PKG_SIGN_IDENTITY="Developer ID Installer: Abak Metrics (LP84QVHHSV)"

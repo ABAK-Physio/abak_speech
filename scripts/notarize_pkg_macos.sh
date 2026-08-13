@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 PKG_VERSION="$(cat "$ROOT_DIR/VERSION")"
-PACKAGE="$ROOT_DIR/dist/ABAK_Speech_${PKG_VERSION}_macOS.pkg"
+PACKAGE="$ROOT_DIR/dist/ABAK_Speech_macOS.pkg"
 KEYCHAIN_PROFILE="ABAK_Notary"
 
 echo
