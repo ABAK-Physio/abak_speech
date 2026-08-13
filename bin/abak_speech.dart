@@ -3,7 +3,10 @@ import 'dart:io';
 
 const String addonId = 'abak_whisper';
 const String addonName = 'ABAK Dictée vocale';
-const String addonVersion = '0.1.0';
+const String addonVersion = String.fromEnvironment(
+  'ABAK_SPEECH_VERSION',
+  defaultValue: '0.0.0',
+);
 
 Future<void> main(List<String> arguments) async {
   if (arguments.contains('--version')) {
