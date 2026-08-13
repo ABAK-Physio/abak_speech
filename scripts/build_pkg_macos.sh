@@ -15,8 +15,12 @@ OUTPUT_DIR="$ROOT_DIR/dist"
 INSTALL_DIR="$ROOT_PKG/Library/Application Support/ABAK/speech"
 
 PKG_IDENTIFIER="care.abak.speech"
-PKG_VERSION="0.1.0"
+PKG_VERSION="$(cat "$ROOT_DIR/VERSION")"
 PKG_OUTPUT="$OUTPUT_DIR/ABAK_Speech_${PKG_VERSION}_macOS.pkg"
+
+APP_SIGN_IDENTITY="Developer ID Application: Abak Metrics (LP84QVHHSV)"
+PKG_SIGN_IDENTITY="Developer ID Installer: Abak Metrics (LP84QVHHSV)"
+ENTITLEMENTS="$ROOT_DIR/macos/abak_speech.entitlements"
 
 echo "==> Vérification des fichiers"
 
@@ -43,6 +47,28 @@ chmod 755 "$INSTALL_DIR/abak-speech"
 chmod 755 "$INSTALL_DIR/whisper-cli"
 chmod 644 "$INSTALL_DIR/ggml-large-v3-turbo.bin"
 
+echo "==> Signature des exécutables"
+
+codesign \
+  --force \
+  --options runtime \
+  --timestamp \
+  --entitlements "$ENTITLEMENTS" \
+  --sign "$APP_SIGN_IDENTITY" \
+  "$INSTALL_DIR/abak-speech"
+
+codesign \
+  --force \
+  --options runtime \
+  --timestamp \
+  --sign "$APP_SIGN_IDENTITY" \
+  "$INSTALL_DIR/whisper-cli"
+
+codesign --verify --verbose=2 "$INSTALL_DIR/abak-speech"
+codesign --verify --verbose=2 "$INSTALL_DIR/whisper-cli"
+
+"$INSTALL_DIR/abak-speech" --status
+
 echo "==> Construction du package"
 
 pkgbuild \
@@ -50,6 +76,7 @@ pkgbuild \
   --identifier "$PKG_IDENTIFIER" \
   --version "$PKG_VERSION" \
   --install-location "/" \
+  --sign "$PKG_SIGN_IDENTITY" \
   "$PKG_OUTPUT"
 
 echo
